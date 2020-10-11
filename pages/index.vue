@@ -21,7 +21,7 @@
       <v-checkbox v-model='is_done' label='読み終わった場合はチェック'></v-checkbox>
       <v-textarea v-model='contents' label='感想' required>
       </v-textarea>
-      <v-select :items='scores' label='評価'></v-select>
+      <v-select v-model="scores" :items='items' label='評価'></v-select>
       <v-btn elevation='2' @click="addBook">登録</v-btn>
     </v-form>
     <!-- error message -->
@@ -30,11 +30,10 @@
 </template>
 
 <script>
-  import Logo from '~/components/Logo.vue'
-  import VuetifyLogo from '~/components/VuetifyLogo.vue'
-  import { mapState } from 'vuex';
-  import { mapActions } from 'vuex';
   import store from '../store';
+
+  const maxScore = 6;
+  const scoresRange = [...Array(maxScore).keys()]
 
   export default {
     data: () => ({
@@ -43,11 +42,13 @@
       genre: '',
       is_done: false,
       contents: '',
-      scores: ['1', '2', '3', '4', '5'],
+      items: scoresRange,
+      scores: '',
       message: ''
     }),
     methods: {
       addBook() {
+        //storeのaction呼び出し
         this.$store.dispatch('addBookAction', {
           title: this.title,
           author: this.author,
@@ -56,7 +57,14 @@
           contents: this.contents,
           scores: this.scores,
           message: this.message,
-        })//storeのaction呼び出し
+        }),
+          this.title = '',
+          this.author = '',
+          this.genre = '',
+          this.is_done = false,
+          this.contents = '',
+          this.items = ['1', '2', '3', '4', '5'],
+          this.message = ''
       },
     },
     async asyncData({ app }) {
