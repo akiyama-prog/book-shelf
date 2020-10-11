@@ -12,6 +12,7 @@ const store = () => {
                     title: data.title,
                     author: data.author,
                     genre: data.genre,
+                    memo: data.memo,
                     is_done: data.is_done,
                     contents: data.contents,
                     scores: data.scores
