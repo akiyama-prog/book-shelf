@@ -14,6 +14,7 @@ const store = () => {
                     genre: data.genre,
                     memo: data.memo,
                     is_done: data.is_done,
+                    finish_date: data.finish_date,
                     contents: data.contents,
                     scores: data.scores
                 })
