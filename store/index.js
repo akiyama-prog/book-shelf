@@ -6,6 +6,11 @@ const store = () => {
         state: () => ({
             books: []
         }),
+        getters: {
+            list(state) {
+                return state.books
+            }
+        },
         mutations: {
             addBook(state, data) {
                 state.books.push({
@@ -18,6 +23,9 @@ const store = () => {
                     contents: data.contents,
                     scores: data.scores
                 })
+            },
+            getBook(state, data) {
+                state.books = data
             }
         },
         actions: {
@@ -27,7 +35,13 @@ const store = () => {
                         console.log(err);
                     })
                 commit('addBook', response)
-            }
+            },
+            async getBookAction() {
+                return await this.$axios.$get('/books')
+                    .catch(err => {
+                        console.log(err);
+                    })
+            },
         }
     })
 }
