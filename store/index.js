@@ -24,23 +24,40 @@ const store = () => {
                     scores: data.scores
                 })
             },
-            getBook(state, data) {
+            getBooks(state, data) {
                 state.books = data
+            },
+            showBook(state, data) {
+                state.books({
+                    title: data.title,
+                    author: data.author,
+                    genre: data.genre,
+                    contents: data.contents,
+                    scores: data.scores,
+                    message: data.message
+                })
             }
         },
         actions: {
-            async addBookAction({ commit }, data) {
+            async addBooksAction({ commit }, data) {
                 const response = await this.$axios.$post('/books', data)
                     .catch(err => {
                         console.log(err);
                     })
                 commit('addBook', response)
             },
-            async getBookAction() {
+            async getBooksAction() {
                 return await this.$axios.$get('/books')
                     .catch(err => {
                         console.log(err);
                     })
+            },
+            async showBookAction({ commit }, bookId) {
+                const response = await this.$axios.$get(`/books/${bookId}`, bookId)
+                    .catch(err => {
+                        console.log(err);
+                    })
+                commit('showBook', response)
             },
         }
     })

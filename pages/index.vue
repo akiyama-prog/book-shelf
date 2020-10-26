@@ -11,7 +11,8 @@
       <v-simple-table>
         <thead>
           <tr>
-            <th class='text-center'>{{ b.title }} {{ b.author }}</th>
+            <th class='text-center' @click=" moveShow(b.id)"><a>{{ b.title }}</a>{{ b.author }}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -51,8 +52,8 @@
       message: ''
     }),
     async fetch({ store }) {
-      const books = await store.dispatch('getBookAction')
-      store.commit('getBook', books)
+      const books = await store.dispatch('getBooksAction')
+      store.commit('getBooks', books)
     },
     computed: {
       displayBooks: function () {
@@ -60,5 +61,10 @@
         return this.$store.getters.list
       },
     },
+    methods: {
+      async moveShow(bookId) {
+        this.$router.push(`/books/${bookId}`)
+      }
+    }
   }
 </script>
