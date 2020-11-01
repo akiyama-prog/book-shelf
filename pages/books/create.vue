@@ -34,9 +34,9 @@
             <v-select v-model="scores" :items='items' label='評価'></v-select>
             <v-textarea v-model='contents' label='感想' required>
             </v-textarea>
-            <v-btn elevation='2' @click="addBook">登録</v-btn>
+            <v-btn elevation='2' @click="addBook"> 登録</v-btn>
         </v-form>
-        <!-- error message -->
+        <!--error message-->
         <p v-if="message">{{ message }}</p>
     </div>
 </template>
@@ -64,7 +64,7 @@
         methods: {
             addBook() {
                 //storeのaction呼び出し
-                this.$store.dispatch('addBookAction', {
+                this.$store.dispatch('addBooksAction', {
                     title: this.title,
                     author: this.author,
                     genre: this.genre,

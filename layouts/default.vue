@@ -63,7 +63,7 @@
           {
             icon: 'mdi-apps',
             title: '本棚をみる',
-            to: '/'
+            to: '/books'
           },
           {
             icon: 'mdi-chart-bubble',
@@ -74,7 +74,7 @@
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: '私の本棚 ~my book journey~'
+        title: '私の本棚'
       }
     }
   }

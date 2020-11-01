@@ -4,11 +4,14 @@ import Vuex from 'vuex'
 const store = () => {
     return new Vuex.Store({
         state: () => ({
-            books: []
+            books: [],
         }),
         getters: {
             list(state) {
                 return state.books
+            },
+            book(state) {
+                return state
             }
         },
         mutations: {
@@ -28,14 +31,14 @@ const store = () => {
                 state.books = data
             },
             showBook(state, data) {
-                state.books({
-                    title: data.title,
-                    author: data.author,
-                    genre: data.genre,
-                    contents: data.contents,
-                    scores: data.scores,
-                    message: data.message
-                })
+                state.title = data.title,
+                    state.author = data.author,
+                    state.genre = data.genre,
+                    state.contents = data.contents,
+                    state.scores = data.scores,
+                    state.message = data.message,
+                    state.memo = data.memo,
+                    state.finish_date = data.finish_date
             }
         },
         actions: {
@@ -53,7 +56,7 @@ const store = () => {
                     })
             },
             async showBookAction({ commit }, bookId) {
-                const response = await this.$axios.$get(`/books/${bookId}`, bookId)
+                const response = await this.$axios.$get(`/books/${bookId}`)
                     .catch(err => {
                         console.log(err);
                     })

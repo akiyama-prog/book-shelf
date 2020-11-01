@@ -26,7 +26,7 @@
             <td>読書メモ：{{ b.memo }}</td>
           </tr>
           <tr>
-            <td>感想：{{ b.content }}</td>
+            <td>感想：{{ b.contents }}</td>
           </tr>
         </tbody>
       </v-simple-table>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import store from '../store';
+  import store from '../../store';
 
   const maxScore = 6;
   const scoresRange = [...Array(maxScore).keys()]
