@@ -31,7 +31,8 @@ const store = () => {
                 state.books = data
             },
             showBook(state, data) {
-                state.title = data.title,
+                state.id = data.id,
+                    state.title = data.title,
                     state.author = data.author,
                     state.genre = data.genre,
                     state.contents = data.contents,
@@ -39,7 +40,14 @@ const store = () => {
                     state.message = data.message,
                     state.memo = data.memo,
                     state.finish_date = data.finish_date
-            }
+            },
+            deleteBook(state, data) {
+                state.books.forEach((books, index) => {
+                    if (books.id === data.id) {
+                        state.books.splice(index, 1)
+                    }
+                })
+            },
         },
         actions: {
             async addBooksAction({ commit }, data) {
@@ -62,6 +70,13 @@ const store = () => {
                     })
                 commit('showBook', response)
             },
+            async deleteAction({ commit }, bookId) {
+                const response = await this.$axios.$delete(`books/${bookId}`)
+                    .catch(err => {
+                        console.log(err);
+                    })
+                commit('deleteBook', response)
+            }
         }
     })
 }
